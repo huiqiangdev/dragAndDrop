@@ -10,28 +10,43 @@ import UIKit
 class ViewController: UIViewController {
     // MARK: - Properties
     
-    @IBOutlet weak var imageView: UIImageView! {
-        didSet {
-            imageView.layer.borderColor = UIColor.green.cgColor
-            imageView.layer.borderWidth = 0.0
-        }
+  @IBOutlet weak var dragView: UIView! {
+    didSet {
+      dragView.layer.borderColor = UIColor.yellow.cgColor
+      dragView.layer.borderWidth = 0.0
+    }
+  }
+  @IBOutlet weak var dragBView: UIView!
+  @IBOutlet weak var dragBLabel: UILabel!
+  @IBOutlet weak var dragLabel: UILabel!
+  
+  @IBOutlet weak var dropView: UIView! {
+    didSet {
+      dropView.layer.borderColor = UIColor.yellow.cgColor
+      dropView.layer.borderWidth = 0.0
     }
     
-    // MARK: - View Life Cycle
+  }
+  @IBOutlet weak var dropLabel: UILabel!
+  // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.layer.borderColor = UIColor.red.cgColor
+//        view.layer.borderColor = UIColor.red.cgColor
         
-        // For an image view, you must explicitly enable user interaction to allow drag and drop.
-        imageView.isUserInteractionEnabled = true
-        
+
         // Enable dragging from the image view (see ViewController+Drag.swift).
         let dragInteraction = UIDragInteraction(delegate: self)
-        imageView.addInteraction(dragInteraction)
+      
+        dragView.addInteraction(dragInteraction)
+      
+        let dragInteractionB = UIDragInteraction(delegate: self)
+      
+        dragBView.addInteraction(dragInteractionB)
         
         // Enable dropping onto the image view (see ViewController+Drop.swift).
         let dropInteraction = UIDropInteraction(delegate: self)
-        view.addInteraction(dropInteraction)
+  
+        dropView.addInteraction(dropInteraction)
     }
 }
